@@ -1,0 +1,23 @@
+
+{% extends 'shop/basic.html' %}
+
+
+{% block title %} New Arrivals..Here!!! {% endblock %}
+
+        {% block content %}
+
+
+
+             {% for product in products %}
+
+
+
+
+                <h2><a href="">{{ product.product_name }}</a></h2>
+                <p>{{ product.category|linebreaksbr }}</p>
+                <strong><p>published: {{ product.pub_date }}</p></strong>
+                <strong><p>written by: {{ product.desc }}</p></strong>
+
+                {% endfor %}
+
+        {% endblock %}
