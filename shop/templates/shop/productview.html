@@ -4,20 +4,46 @@
 
 {% block title %} New Arrivals..Here!!! {% endblock %}
 
-        {% block content %}
-
-
-
-             {% for product in products %}
+        {% block body %}
+     <div = "container">
 
 
 
 
-                <h2><a href="">{{ product.product_name }}</a></h2>
-                <p>{{ product.category|linebreaksbr }}</p>
-                <strong><p>published: {{ product.pub_date }}</p></strong>
-                <strong><p>written by: {{ product.desc }}</p></strong>
 
-                {% endfor %}
+            <div class="jumbotron jumbotron-fluid">
+              <div class="container">
+                <h1 class="display-4">New Arrivals!!</h1>
+                <p class="lead">Check out the latest arrivals right here......</p>
+              </div>
+            </div>
 
-        {% endblock %}
+
+<div class="row">
+
+
+        {% for product in products %}
+
+    <div class="col-md-4">
+            <div class="card" style="width: 18rem; height: 40rem;">
+                <a href="/shop/productdetail/1 }}>" ><img class="card-img-top"  src="{{ product.image.url }}" alt="Card image cap"></a>
+              <div class="card-body">
+                <h5 class="card-title">{{ product.product_name }}</h5>
+                  <h7 class="card-title">price :{{ product.price }}</h7>
+                <p class="card-text"> {{ product.desc }}</p>
+                <a href="#" class="btn btn-primary">Add to cart</a>
+                  <a href="#" class="btn btn-dark align-left">Buy Now</a>
+              </div>
+            </div>
+
+    </div>
+
+
+
+
+         {% endfor %}
+
+     </div>
+</div>
+
+        {% endblock body %}

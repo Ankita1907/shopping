@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.utils import timezone
+from django.shortcuts import  render, get_object_or_404
 from . models import Product
+from . models import Contact
 
 # Create your views here.
 def index(request):
@@ -15,15 +17,20 @@ def about(request):
 
 
 def contact(request):
-      return HttpResponse("we are at contact now")
+      contacts = Contact.objects.all()
+      return render(request, 'shop/contact.html', {'contacts': contacts})
+
+
 
 def tracker(request):
       return HttpResponse("we are at tracker now")
 
-def search(request):
-      return HttpResponse("we are at search now")
+def productdetail(request, product_id):
+      product = get_object_or_404( Product, pk=product_id)
+      return render(request, 'shop/productdetail.html',{'product':product})
 
 def productview(request):
+
       products = Product.objects.all()
       return render(request, 'shop/productview.html', {'products': products})
 

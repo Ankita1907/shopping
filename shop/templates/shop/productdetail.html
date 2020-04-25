@@ -1,0 +1,42 @@
+
+
+
+
+{% extends 'shop/basic.html' %}
+
+
+{% block title %}  {{product.product_name}}  {% endblock %}
+
+
+        {% block body %}
+
+
+
+
+
+            <div class="jumbotron jumbotron-fluid">
+              <div class="container">
+                <h1 class="display-4"> Product Name :  {{product.product_name}} </h1>
+                  <p class="lead"> Catergory :  {{product.category}} </p>
+                  <p class="lead">  Subcategory : {{product.subcategory}} </p>
+
+
+              </div>
+            </div>
+
+            <div class="text-center">
+  <img src="{{ product.image.url }}" class="rounded" alt="...">
+</div>
+
+
+ <div class="text-center">
+<p class="lead"> Product Description :  {{product.desc}} </p>
+<p class="lead"> Price :  {{product.price}} </p>
+ </div>
+
+
+
+ <div class="text-center"><button class="btn btn-danger btn-sx" type="button">Buy Now !!</button></div>
+
+
+        {% endblock body %}

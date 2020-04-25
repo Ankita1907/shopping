@@ -1,0 +1,45 @@
+
+{% extends 'shop/basic.html' %}
+
+
+{% block title %} New Arrivals..Here!!! {% endblock %}
+
+        {% block body %}
+
+
+
+                        <div class="jumbotron jumbotron-fluid">
+              <div class="container">
+                <h1 class="display-4">Contact Us Here...!!</h1>
+                <p class="lead">Feel free to contact uss........</p>
+              </div>
+            </div>
+
+<div class="row">
+        {% for contact in contacts %}
+
+   <div class="col-md-4">
+
+
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="{{ contact.contact_image.url }}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{ contact.contact_name }}</h5>
+                <p class="card-text"> {{ contact.contact_post }}</p>
+                <a href="#" class="btn btn-primary">See profile</a>
+              </div>
+            </div>
+   </div>
+
+
+
+
+
+
+
+
+                {% endfor %}
+</div>
+
+
+        {% endblock body %}

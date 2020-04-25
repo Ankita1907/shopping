@@ -14,3 +14,14 @@ class Product(models.Model):
         return self.product_name
 
 
+class Contact(models.Model):
+    contact_id = models.AutoField
+    contact_name = models.CharField(max_length=50)
+    contact_no = models.IntegerField(default=0)
+    contact_email = models.EmailField('User Email')
+    contact_post = models.CharField(max_length=50)
+    Contact_about = models.TextField()
+    contact_image = models.ImageField(upload_to="shop/images", default="")
+
+    def __str__(self):
+        return self.contact_name
