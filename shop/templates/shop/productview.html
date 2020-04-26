@@ -26,12 +26,14 @@
 
     <div class="col-md-4">
             <div class="card" style="width: 18rem; height: 40rem;">
-                <a href="/shop/productdetail/1 }}>" ><img class="card-img-top"  src="{{ product.image.url }}" alt="Card image cap"></a>
+                <a href="/shop/productdetail/{{product.id}}" ><img class="card-img-top"  src="{{ product.image.url }}" alt="Card image cap"></a>
               <div class="card-body">
-                <h5 class="card-title">{{ product.product_name }}</h5>
+                <h5 class="card-title" id="namepr{{product.id}}">{{ product.product_name }}</h5>
                   <h7 class="card-title">price :{{ product.price }}</h7>
                 <p class="card-text"> {{ product.desc }}</p>
-                <a href="#" class="btn btn-primary">Add to cart</a>
+                  <span id="divpr{{product.id}}" class="divpr">
+                  <button id="pr{{product.id}}" class="btn btn-primary cart">Add to cart</button>
+                   </span>
                   <a href="#" class="btn btn-dark align-left">Buy Now</a>
               </div>
             </div>

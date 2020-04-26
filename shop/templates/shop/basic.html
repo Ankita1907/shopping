@@ -57,14 +57,18 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
+
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-success mx-2 my-sm-0" type="submit">Search</button>
     </form>
+   <button type="button" class="btn btn-secondary" id="popcart" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus.">
+  Cart(<span id="cart">0</span>)
+</button>
+
+
   </div>
 </nav>
 
@@ -213,5 +217,103 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+  {% block js %}
+
+  <script>
+        console.log('working');
+        if(localStorage.getItem('cart') == null){
+        var cart ={};
+        }
+        else{
+        cart = JSON.parse(localStorage.getItem('cart'));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+        updateCart(cart);
+        }
+
+        $('.cart').click(function(){
+        console.log('clicked');
+        var idstr = this.id.toString();
+        console.log(idstr);
+        if (cart[idstr] !=undefined){
+        cart[idstr] = cart[idstr] + 1;
+        }
+        else
+        {
+        cart[idstr] = 1;
+        }
+        updateCart(cart);
+        console.log(cart);
+        localStorage.setItem('cart' ,JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+        });
+        $('#popcart').popover();
+
+        document.getElementById("popcart").setAttribute('data-content', '<h5>cart</h5>');
+
+
+        function updateCart(cart){
+        for (var item in cart){
+        document.getElementById('div'+ item ).innerHTML = "<button id = 'minus" + item + " 'class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] +"</span> <button id='plus" + item +"' class='btn btn-primary plus'> + </button>";
+        }
+       }
+    $('#popcart').popover();
+      updatePopover(cart);
+     function updatePopover(cart)
+     {
+        console.log('Inside the popover thing');
+        var popStr = "";
+        popStr = popStr + "<h5>Cart for your items in shopping</h5>";
+        var i = 1;
+        for (var item in cart){
+          popStr = popStr + "<b>" +  i + "  . ";
+          popStr = popStr + document.getElementById('name' + item).innerHTML + "  Qty : " + cart[item] + '<br>';
+          i=i+1;
+
+        }
+
+        document.getElementById('popcart').setAttribute('data-content',popStr);
+        $('#popcart').popover('show');
+     }
+
+
+
+
+
+        
+
+       $('.divpr').on("click", "button.minus", function() {
+                 console.log("minus clicked");
+                 a = this.id.slice(7, );
+                 console.log(a);
+                 cart['pr'+a] = cart['pr'+a] -1;
+                 cart['pr'+a] = Math.max(0 , cart['pr']+a);
+                 document.getElementById('valpr'+a).innerHTML = cart['pr'+a];
+                 updateCart(cart);
+                 });
+
+       $('.divpr').on("click", "button.plus", function() {
+                 console.log("plus clicked");
+                 a = this.id.slice(6, );
+                 console.log(a);
+                 cart['pr'+a] = cart['pr'+a] +1;
+
+                 document.getElementById('valpr'+a).innerHTML = cart['pr'+a];
+                 updateCart(cart);
+
+          });
+
+
+
+
+
+  </script>
+
+
+  {% endblock %}
+
+
+
   </body>
 </html>
