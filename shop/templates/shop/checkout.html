@@ -1,0 +1,126 @@
+
+
+{% extends 'shop/basic.html' %}
+
+
+{% block title %}  Checkout..  {% endblock %}
+
+
+        {% block body %}
+
+
+          <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h3 class="display-4">Checkout..</h3>
+    <p class="lead">Follow these steps for checkout please..</p>
+  </div>
+</div>
+
+
+<div class="container">
+    <div class="col my-4">
+
+
+
+    <h2 class="diaplay-4">Step 1: these are the items selected for checkout..</h2>
+
+    <ul class="list-group" id="items">
+     
+    </ul>
+
+    </div>
+
+ <div class="col my-4">
+ <h2 class="diaplay-4">Step 2: Fill in the details for shipping..</h2>
+
+
+    <form>
+  <div class="form-row">
+      <div class="form-group col-md-6">
+      <label for="inputname">Name</label>
+      <input type="name" class="form-control" id="inputname">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input type="email" class="form-control" id="inputEmail4">
+    </div>
+
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+  </div>
+  <div class="form-group">
+    <label for="inputAddress2">Address 2</label>
+    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">State</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+      <div class="form-group col-md-2">
+      <label for="inputtel">Phone Number</label>
+      <input type="tel" class="form-control" id="inputtel">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+  </div>
+
+
+  <button type="submit" class="btn btn-primary">Place Order</button>
+</form>
+ </div>
+
+</div>
+
+
+
+
+{% endblock body %}
+
+
+
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+{% block js %}
+<script>
+
+    if(localStorage.getItem('cart') == null){
+    var cart = {};
+    }
+    else{
+
+    cart =JSON.parse(localStorage.getItem('cart'));
+
+    }
+  console.log(cart);
+  for(item in cart){
+  let name = cart[item][1];
+  let qty =cart[item][0];
+  mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">${name}
+         <span class="badge badge-primary badge-pill">${qty}</span>
+     </li>`
+
+
+             $('#items').append(mystr);
+        }
+</script>
+
+
+{% endblock %}
